@@ -12,15 +12,18 @@
 <div id="Login_page">
     <h1 id="nama_website">Money Tracker</h1>
     <img id="gambar" src="img-D/money-logo-vector-template-removebg-preview(2).png">
-    <label id="username" for="name_user">Username</label>
-    <input type="text" id="name_user" name="name_user" placeholder="nama anda...."> 
-    <div id="button">
-        <a id="nextp" href="file:///C:/Users/NIVAD/OneDrive/Documents/Belajar/Code%20Block/.vscode/HTML/DavinNagataNathanielSuwandi_96217_week03/tugasweek03.html#">Login</a>
-    </div>
+
+        <label id="username" for="name_user">Username</label>
+        <input type="text" id="name_user" placeholder="nama anda....">
+        <a id="nextp" href="main.html" onclick="simpaninput()">Login</a>
 </div>
 
     <script>
-        
+        function simpaninput(){
+        let userinput = document.getElementById("name_user").value;
+        localStorage.setItem('name_user', userinput);
+        }
+
     </script>
 </body>
 </html>
