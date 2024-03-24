@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTS PTI</title>
+    <link rel="stylesheet" href="aboutpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <div id="top">
+            <div id="logo">
+                <img src="imgW/moneybag.png" width="75" height="75" />
+            </div>
+            <div id="text">
+                <p id="hellomsg"></p>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="main.html">Main</a></li>
+                    <li><a href="income.html">Income</a></li>
+                    <li><a href="outcome.html">Outcome</a></li>
+                    <li ><a class ="active" href="about.html">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="mid">
+            <div id="image-container">
+                <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+                    <img class="image" src="imgW/umn1.png" draggable="false" />
+                    <img class="image" src="imgW/umn2.jpg" draggable="false"/>
+                    <img class="image" src="imgW/umn3.png" draggable="false"/>
+                    <img class="image" src="imgW/umn4.jpg" draggable="false"/>
+                    <img class="image" src="imgW/umn5.jpg" draggable="false"/>
+                    <img class="image" src="imgW/umn6.jpg" draggable="false"/>
+                    <img class="image" src="imgW/umn7.jpg" draggable="false"/>
+                    <img class="image" src="imgW/umn8.jpg" draggable="false"/>
+                </div>
+            </div>
+        </div>
+        <div id="aboutteam">
+            <img src="imgW/utspti.jpg" />
+            <ul>
+                <li>
+                    <h1 id="subtitle">PTI Midterm Exam</h1>
+                </li>
+                <li id="text">
+                    Kami dari kelompok 1 kelas I untuk mata kuliah Intro to Internet Technology. Ini adalah proyek UTS lab kami. Halaman ini merupakan halaman yang mendeskripsikan team kami.
+                </li>
+            </ul>
+        </div>
+        <div class="wrapper">
+            <h1 class="fontext">Our Team</h1>
+
+            <div class="team">
+                <div class="team_member">
+                    <div class="team_img">
+                        <img src="imgW/erick.jpg" />
+                    </div>
+                    <h3>Frederick</h3>
+                    <p class="role">Team Leader</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat interdum varius sit amet mattis vulputate enim nulla. Elementum facilisis leo vel fringilla.</p>
+                </div>
+                <div class="team_member">
+                    <div class="team_img">
+                        <img src="imgW/davin.jpg" />
+                    </div>
+                    <h3>Davin</h3>
+                    <p class="role">Team Member</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat interdum varius sit amet mattis vulputate enim nulla. Elementum facilisis leo vel fringilla.</p>
+                </div>
+                <div class="team_member">
+                    <div class="team_img">
+                        <img src="imgW/jojo.jpg" />
+                    </div>
+                    <h3>Jonathan</h3>
+                    <p class="role">Team Member</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat interdum varius sit amet mattis vulputate enim nulla. Elementum facilisis leo vel fringilla.</p>
+                </div>
+                <div class="team_member">
+                    <div class="team_img">
+                        <img src="imgW/wilson.jpg" />
+                    </div>
+                    <h3>Wilson</h3>
+                    <p class="role">Team Member</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat interdum varius sit amet mattis vulputate enim nulla. Elementum facilisis leo vel fringilla.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const track = document.getElementById("image-track");
+        let nextPercentage = 0;
+
+        window.addEventListener("mousedown", e => {
+            track.dataset.mouseDownAt = e.clientX;
+        });
+
+        window.addEventListener("mousemove", e => {
+            if (track.dataset.mouseDownAt === "0") return;
+
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+                maxDelta = window.innerWidth / 2;
+
+            let percentage = (mouseDelta / maxDelta) * -100;
+            nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
+
+            // Limit the slider's movement
+            const maxPercentage = 0;
+            const minPercentage = (window.innerWidth - track.offsetWidth) / window.innerWidth * 70;
+            nextPercentage = Math.min(maxPercentage, Math.max(minPercentage, nextPercentage));
+
+            track.style.transform = `translate(${nextPercentage}%, -50%)`;
+
+            for (const image of track.getElementsByClassName("image")) {
+                image.style.objectPosition = `${100 + nextPercentage}% center`;
+            }
+        });
+
+        window.addEventListener("mouseup", () => {
+            track.dataset.mouseDownAt = "0";
+            track.dataset.prevPercentage = nextPercentage;
+        });
+
+        name_user = localStorage.getItem('name_user');
+        welcomemsg = document.getElementById('hellomsg');
+        welcomemsg.textContent = 'Hello, ' + name_user + '!';
+    </script>
+</body>
+</html>
