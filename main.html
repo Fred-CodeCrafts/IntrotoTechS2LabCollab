@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTS PTI</title>
     <link rel="stylesheet" href="mainpage.css">
+	
 </head>
 <body>
     <div id="container">
@@ -12,38 +13,88 @@
             <div id="logo">
                 <img src="imgW/moneybag.png" width="75" height="75" />
             </div>
-            <div id="text">
-                <p id="hellomsg"></p>
-            </div>
+                <p id="hellomsg" class="fun-font"></p>
             <div class="menu">
                 <ul>
                     <li><a class="active" href="#">Main</a></li>
                     <li><a href="income.html">Income</a></li>
                     <li><a href="outcome.html">Outcome</a></li>
-                    <li ><a href="about.html">About Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
                 </ul>
             </div>
         </div>
         <div id="mid">
             <div id="midcontent">
                 <div class="box1">
-
+                    <p style="margin-top: 50px; margin-left:75px; margin-right:10px; font-size: 30px;"><strong>Saldo Saya</strong></p>
+                    <p style="margin: 20px; font-size: 80px;" id="currentBalance"><strong></strong></p>
+					 <center><button class="resetbutton" onclick="resetTransactions()"><h1>Reset Transactions</h1></button></center>
                 </div>
                 <div class="box2">
-                    
+				  <h2 id="poof">!!!Transaction History!!!</h2>
+
+                    <ul id="pastTransactions"></ul>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        name_user = localStorage.getItem('name_user');
-        welcomemsg = document.getElementById('hellomsg');
-        welcomemsg.textContent = 'Hello, ' + name_user + '!';
-
-        function income(){
-            
+        function resetTransactions() {
+            localStorage.removeItem("transactions");
+            window.location.reload();
         }
+
+        var transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+        var currentBalance = 0;
+        for (var i = 0; i < transactions.length; i++) {
+            currentBalance += transactions[i].nominal;
+        }
+        document.getElementById("currentBalance").innerText = "$" + currentBalance;
+		var pastTransactionsList = document.getElementById("pastTransactions");
+		  
+
+
+		for (var i = 0; i < transactions.length; i++) {
+			document.getElementById('poof').innerHTML = '';
+		  var transaction = transactions[i];
+		  var listItem = document.createElement("li");
+		  listItem.classList.add("transaction-item");
+
+		  var transactionContent = document.createElement("div");
+		  transactionContent.classList.add("transaction-content");
+
+		  var nameCategoryWrapper = document.createElement("div");
+		  nameCategoryWrapper.classList.add("name-category-wrapper");
+
+		  var nameElement = document.createElement("span");
+		  nameElement.innerHTML = "<strong>" + transaction.name + "</strong><br>";
+
+		  var categoryElement = document.createElement("span");
+		  categoryElement.innerHTML = transaction.category;
+
+		  var nominalElement = document.createElement("span");
+		  nominalElement.classList.add("nominal");
+		  nominalElement.innerHTML = "$" + transaction.nominal;
+
+		  if (transaction.nominal >= 0) {
+			listItem.classList.add("positive"); 
+		  } else {
+			listItem.classList.add("negative");
+		  }
+
+		  transactionContent.appendChild(nameCategoryWrapper);
+		  nameCategoryWrapper.appendChild(nameElement);
+		  nameCategoryWrapper.appendChild(categoryElement);
+		  transactionContent.appendChild(nominalElement);
+
+		  listItem.appendChild(transactionContent);
+		  pastTransactionsList.appendChild(listItem);
+		}
+
+        var name_user = localStorage.getItem('name_user');
+        var welcomemsg = document.getElementById('hellomsg');
+        welcomemsg.textContent = 'Hello, ' + name_user + '!';
     </script>
 </body>
-</html> 
+</html>

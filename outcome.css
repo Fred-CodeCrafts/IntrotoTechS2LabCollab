@@ -54,6 +54,15 @@ body {
     background-color: #9dc183;
 }
 
+.fun-font {
+       font-family: 'Parisienne', cursive;
+        font-size: 2em; 
+        display: flex;
+        align-items: center;
+		color: white;
+    margin-right:350px;
+    }
+	
 #top {
     display: flex;
     justify-content: space-between;
@@ -66,9 +75,10 @@ body {
 }
 
 div#midcontent{
+	width: 66%;
+	margin: 0 auto;
     display: flex;
     flex-direction: column;
-    margin: 20px 60px 0px 60px;
 }
 
 label{
@@ -99,3 +109,31 @@ h1#user_outcome{
     border-radius: 10px;
     border-style: none;
 }
+select.bar {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px; 
+    background-color: #f1f1f1;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+}
+
+select.bar option {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+select.bar option:hover {
+    background-color: #ddd;
+}
+
+select.bar:focus {
+    border: 2px solid #007bff;
+}
+
